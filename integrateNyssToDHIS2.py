@@ -126,7 +126,7 @@ def createDataElements():
 def createProgram():
     with open("program_events.json") as json_file:
         dataStructureProgramDHIS2 = json.load(json_file)
-        dataStructureProgramDHIS2['programs'][0]['organisationUnits'] = requests.get("http://localhost:8080/api/organisationUnits", auth=(dhisUsername, dhisPassword)).json()['organisationUnits']
+        dataStructureProgramDHIS2['programs'][0]['organisationUnits'] = requests.get(organisationUnitsURL, auth=(dhisUsername, dhisPassword)).json()['organisationUnits']
         print()
         r = requests.post(metadataURL + "identifier=UID", auth=(dhisUsername, dhisPassword), json=dataStructureProgramDHIS2)
         if r.ok is True:
