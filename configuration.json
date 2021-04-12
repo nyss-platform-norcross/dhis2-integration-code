@@ -1,0 +1,23 @@
+{
+    "nyssUsername": "",
+    "nyssPassword": "",
+    "dhisUsername": "",
+    "dhisPassword": "",
+    "nyssRootURL" : "",
+    "dhisRootURL" : "",
+    "seedOrgUnit" : {
+                        "organisationUnits": [
+                            {
+                                    "id" : "nyssMandawi",
+                                    "code" : "nyss_country_mandawi",
+                                    "level": 1,
+                                    "openingDate": "2020-10-15T00:00:00.000",
+                                    "name": "Mandawi",
+                                    "shortName": "mand"
+                            }
+                        ]
+                    },
+    "idSeedOrgUnit" : "nyssMandawi",
+    "nationalSocietyId" : "1",
+    "projectId" : "1"
+}

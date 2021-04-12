@@ -1,0 +1,230 @@
+{
+    "programStages": [
+        {
+            "id": "nyss_55c401",
+            "code": "hr_events_program_stage",
+            "name": "Health Risks/Events reports",
+            "allowGenerateNextVisit": false,
+            "preGenerateUID": false,
+            "openAfterEnrollment": false,
+            "repeatable": false,
+            "remindCompleted": false,
+            "displayGenerateEventBox": true,
+            "generatedByEnrollmentDate": false,
+            "validationStrategy": "ON_COMPLETE",
+            "autoGenerateEvent": true,
+            "hideDueDate": false,
+            "blockEntryForm": false,
+            "enableUserAssignment": false,
+            "minDaysFromStart": 0,
+            "program": {
+                "id": "nyss_rep_pr"
+            },
+            "programStageDataElements": [
+                {
+                    "displayInReports": true,
+                    "skipSynchronization": false,
+                    "externalAccess": false,
+                    "renderOptionsAsRadio": false,
+                    "allowFutureDate": false,
+                    "compulsory": false,
+                    "allowProvidedElsewhere": false,
+                    "sortOrder": 0,
+                    "favorite": false,
+                    "access": {
+                        "read": true,
+                        "update": true,
+                        "externalize": true,
+                        "delete": true,
+                        "write": true,
+                        "manage": true
+                    },
+                    "programStage": {
+                        "id": "nyss_55c401"
+                    },
+                    "dataElement": {
+                        "id": "xJSf5LyGP94"
+                    }
+                },
+                {
+                    "displayInReports": true,
+                    "skipSynchronization": false,
+                    "externalAccess": false,
+                    "renderOptionsAsRadio": false,
+                    "allowFutureDate": false,
+                    "compulsory": false,
+                    "allowProvidedElsewhere": false,
+                    "sortOrder": 1,
+                    "favorite": false,
+                    "access": {
+                        "read": true,
+                        "update": true,
+                        "externalize": true,
+                        "delete": true,
+                        "write": true,
+                        "manage": true
+                    },
+                    "programStage": {
+                        "id": "nyss_55c401"
+                    },
+                    "dataElement": {
+                        "id": "go4soBvUeOH"
+                    }
+                },
+                {
+                    "displayInReports": true,
+                    "skipSynchronization": false,
+                    "externalAccess": false,
+                    "renderOptionsAsRadio": false,
+                    "allowFutureDate": false,
+                    "compulsory": false,
+                    "allowProvidedElsewhere": false,
+                    "sortOrder": 2,
+                    "favorite": false,
+                    "access": {
+                        "read": true,
+                        "update": true,
+                        "externalize": true,
+                        "delete": true,
+                        "write": true,
+                        "manage": true
+                    },
+                    "programStage": {
+                        "id": "nyss_55c401"
+                    },
+                    "dataElement": {
+                        "id": "s9M3Gq8LgPs"
+                    }
+                },
+                {
+                    "displayInReports": true,
+                    "skipSynchronization": false,
+                    "externalAccess": false,
+                    "renderOptionsAsRadio": false,
+                    "allowFutureDate": false,
+                    "compulsory": false,
+                    "allowProvidedElsewhere": false,
+                    "sortOrder": 3,
+                    "favorite": false,
+                    "access": {
+                        "read": true,
+                        "update": true,
+                        "externalize": true,
+                        "delete": true,
+                        "write": true,
+                        "manage": true
+                    },
+                    "programStage": {
+                        "id": "nyss_55c401"
+                    },
+                    "dataElement": {
+                        "id": "rANqSWN0Ehq"
+                    }
+                },
+                {
+                    "displayInReports": true,
+                    "skipSynchronization": false,
+                    "externalAccess": false,
+                    "renderOptionsAsRadio": false,
+                    "allowFutureDate": false,
+                    "compulsory": false,
+                    "allowProvidedElsewhere": false,
+                    "sortOrder": 4,
+                    "favorite": false,
+                    "access": {
+                        "read": true,
+                        "update": true,
+                        "externalize": true,
+                        "delete": true,
+                        "write": true,
+                        "manage": true
+                    },
+                    "programStage": {
+                        "id": "nyss_55c401"
+                    },
+                    "dataElement": {
+                        "id": "TtnAvCEqnf5"
+                    }
+                },
+                {
+                    "displayInReports": true,
+                    "skipSynchronization": false,
+                    "externalAccess": false,
+                    "renderOptionsAsRadio": false,
+                    "allowFutureDate": false,
+                    "compulsory": false,
+                    "allowProvidedElsewhere": false,
+                    "sortOrder": 5,
+                    "favorite": false,
+                    "access": {
+                        "read": true,
+                        "update": true,
+                        "externalize": true,
+                        "delete": true,
+                        "write": true,
+                        "manage": true
+                    },
+                    "programStage": {
+                        "id": "nyss_55c401"
+                    },
+                    "dataElement": {
+                        "id": "xXkaRheq7VM"
+                    }
+                },
+                {
+                    "displayInReports": true,
+                    "skipSynchronization": false,
+                    "externalAccess": false,
+                    "renderOptionsAsRadio": false,
+                    "allowFutureDate": false,
+                    "compulsory": false,
+                    "allowProvidedElsewhere": false,
+                    "sortOrder": 5,
+                    "favorite": false,
+                    "access": {
+                        "read": true,
+                        "update": true,
+                        "externalize": true,
+                        "delete": true,
+                        "write": true,
+                        "manage": true
+                    },
+                    "programStage": {
+                        "id": "nyss_55c401"
+                    },
+                    "dataElement": {
+                        "id": "TtnAsCEqwf2"
+                    }
+                }
+            ]
+        }
+    ],
+    "programs": [
+        {
+            "name": "Health Risks/Events reports",
+            "shortName": "hr_events_program",
+            "code" : "hr_events_program_code",
+            "id": "nyss_rep_pr",
+            "ignoreOverdueEvents": false,
+            "skipOffline": false,
+            "onlyEnrollOnce": false,
+            "version": 1,
+            "maxTeiCountToReturn": 0,
+            "selectIncidentDatesInFuture": false,
+            "selectEnrollmentDatesInFuture": false,
+            "useFirstStageDuringRegistration": false,
+            "completeEventsExpiryDays": 0,
+            "minAttributesRequiredToSearch": 1,
+            "displayFrontPageList": false,
+            "programType": "WITHOUT_REGISTRATION",
+            "accessLevel": "OPEN",
+            "displayIncidentDate": true,
+            "expiryDays": 0,
+            "programStages": [
+                {
+                    "id": "nyss_55c401"
+                }
+            ]
+        }
+    ]
+}

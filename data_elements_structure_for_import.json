@@ -1,0 +1,88 @@
+{
+    "optionSets": [
+        {
+            "id": "yYBXHeZ632a",
+            "code": "nyss_healthRiskEventsTitles",
+            "name": "Health Risk / Event",
+            "version": 2,
+            "valueType": "TEXT",
+            "options": [
+            ]
+        }
+    ],
+    "dataElements": [
+        {
+            "id": "xXkaRheq7VM",
+            "code": "coordinates",
+            "name": "Coordinates",
+            "shortName": "coord",
+            "aggregationType": "NONE",
+            "domainType": "TRACKER",
+            "valueType": "COORDINATE",
+            "formName": "Coordinates" 
+        },
+        {
+            "id": "go4soBvUeOH",
+            "code": "femaleZeroToFour",
+            "name": "Female 0 - 4 years",
+            "shortName": "f0-4",
+            "aggregationType": "SUM",
+            "domainType": "TRACKER",
+            "valueType": "NUMBER",
+            "formName": "Female 0 - 4 years" 
+        },
+        {
+            "id": "s9M3Gq8LgPs",
+            "code": "femaleFiveYearsAndAbove",
+            "name": "Female 5 years and above",
+            "shortName": "f>4",
+            "aggregationType": "SUM",
+            "domainType": "TRACKER",
+            "valueType": "NUMBER",
+            "formName": "Female 5 years and above" 
+        },
+        {
+            "id": "xJSf5LyGP94",
+            "code": "healthRiskEvent",
+            "name": "Health Risk / Event",
+            "shortName": "hrev",
+            "aggregationType": "NONE",
+            "domainType": "TRACKER",
+            "valueType": "TEXT",
+            "formName": "Health Risk Event" ,
+            "optionSet": {
+                "code": "nyss_healthRiskEventsTitles"
+            }
+        },
+        {
+            "id": "rANqSWN0Ehq",
+            "code": "maleZeroToFour",
+            "name": "Male 0 - 4 years",
+            "shortName": "m0-4",
+            "aggregationType": "SUM",
+            "domainType": "TRACKER",
+            "valueType": "NUMBER",
+            "formName": "Male 0 - 4 years" 
+        },
+        {
+            "id": "TtnAvCEqnf5",
+            "code": "maleFiveYearsAndAbove",
+            "name": "Male 5 years and above",
+            "shortName": "m>4",
+            "aggregationType": "SUM",
+            "domainType": "TRACKER",
+            "valueType": "NUMBER",
+            "formName": "Male 5 years and above" 
+        },
+        {
+            "id": "TtnAsCEqwf2",
+            "code": "uniqueNyssEventIdentifier",
+            "name": "Event identifier Nyss",
+            "shortName": "eiN",
+            "aggregationType": "SUM",
+            "domainType": "TRACKER",
+            "valueType": "TEXT",
+            "formName": "Event identifier" 
+        }
+    ]
+}
