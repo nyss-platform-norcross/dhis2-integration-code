@@ -9,18 +9,11 @@ import hashlib
 import globalsNyss
 import synchronizeGeostructure
 import createDataElements
+import createProgram
 
 # Set up all necessary global variables
 globalsNyss.initialize()
 
-
-def createProgram():
-    with open("program_events.json") as json_file:
-        dataStructureProgramDHIS2 = json.load(json_file)
-        dataStructureProgramDHIS2['programs'][0]['organisationUnits'] = requests.get(organisationUnitsURL, auth=(dhisUsername, dhisPassword)).json()['organisationUnits']
-        r = requests.post(metadataURL + "identifier=UID", auth=(dhisUsername, dhisPassword), json=dataStructureProgramDHIS2)
-        if r.ok is True:
-           print("Adding program & stage: Post to DHIS2 returned ok")
 def synchronizeReports():
     reports = {
         "events" : []
@@ -112,7 +105,7 @@ def switch(argument):
     switcher = {
         1: synchronizeGeostructure.synchronizeOrgUnits,
         2: createDataElements.createDataElements,
-        3: createProgram,
+        3: createProgram.createProgramInDhis,
         4: synchronizeReports
     }
     func = switcher.get(argument)

@@ -3,9 +3,8 @@ import globalsNyss
 import uuid
 
 def initializeVariables():
-    global geoStructureURL, organisationUnitsURL
+    global geoStructureURL
     geoStructureURL = globalsNyss.nyssRootURL + "nationalSocietyStructure/get?nationalSocietyId=" + str(globalsNyss.nationalSocietyId)
-    organisationUnitsURL = globalsNyss.dhisRootURL + "organisationUnits"
 
 def getGeoStructure():
     with requests.Session() as session:
