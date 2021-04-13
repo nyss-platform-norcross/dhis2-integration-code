@@ -1,7 +1,7 @@
 import json
 
 def initialize():
-    global loginURL, loginPARAMS, nyssRootURL, healthRisksURL, organisationUnitsURL, nationalSocietyId, dhisRootURL, organisationUnits, metadataURL, dhisUsername, dhisPassword
+    global loginURL, loginPARAMS, nyssRootURL, healthRisksURL, organisationUnitsURL, nationalSocietyId, projectId, dhisRootURL, organisationUnits, idSeedOrgUnit, metadataURL, dhisUsername, dhisPassword
     # load config file and configure necessary variables
     with open("configuration.json") as json_file:
             config = json.load(json_file)
@@ -22,8 +22,6 @@ def initialize():
     loginURL = nyssRootURL + "authentication/login"
     reportsURL = nyssRootURL + "dhis2/list?nationalSocietyId=" + str(nationalSocietyId)
     healthRisksURL = nyssRootURL + "healthRisk/list"
-    exportToCsv = nyssRootURL + "report/exportToCsv"
     # api endpoint DHIS2
     metadataURL = dhisRootURL + "metadata?"
-    eventsURL = dhisRootURL + "events.json"
     organisationUnitsURL = dhisRootURL + "organisationUnits"
