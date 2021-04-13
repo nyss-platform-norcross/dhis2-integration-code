@@ -195,6 +195,81 @@
                     "dataElement": {
                         "id": "TtnAsCEqwf2"
                     }
+                },
+                {
+                    "displayInReports": true,
+                    "skipSynchronization": false,
+                    "externalAccess": false,
+                    "renderOptionsAsRadio": false,
+                    "allowFutureDate": false,
+                    "compulsory": false,
+                    "allowProvidedElsewhere": false,
+                    "sortOrder": 5,
+                    "favorite": false,
+                    "access": {
+                        "read": true,
+                        "update": true,
+                        "externalize": true,
+                        "delete": true,
+                        "write": true,
+                        "manage": true
+                    },
+                    "programStage": {
+                        "id": "nyss_55c401"
+                    },
+                    "dataElement": {
+                        "id": "fb21c617ca9"
+                    }
+                },
+                {
+                    "displayInReports": true,
+                    "skipSynchronization": false,
+                    "externalAccess": false,
+                    "renderOptionsAsRadio": false,
+                    "allowFutureDate": false,
+                    "compulsory": false,
+                    "allowProvidedElsewhere": false,
+                    "sortOrder": 5,
+                    "favorite": false,
+                    "access": {
+                        "read": true,
+                        "update": true,
+                        "externalize": true,
+                        "delete": true,
+                        "write": true,
+                        "manage": true
+                    },
+                    "programStage": {
+                        "id": "nyss_55c401"
+                    },
+                    "dataElement": {
+                        "id": "b048acb1e1a"
+                    }
+                },
+                {
+                    "displayInReports": true,
+                    "skipSynchronization": false,
+                    "externalAccess": false,
+                    "renderOptionsAsRadio": false,
+                    "allowFutureDate": false,
+                    "compulsory": false,
+                    "allowProvidedElsewhere": false,
+                    "sortOrder": 5,
+                    "favorite": false,
+                    "access": {
+                        "read": true,
+                        "update": true,
+                        "externalize": true,
+                        "delete": true,
+                        "write": true,
+                        "manage": true
+                    },
+                    "programStage": {
+                        "id": "nyss_55c401"
+                    },
+                    "dataElement": {
+                        "id": "d8d6b1c48a4"
+                    }
                 }
             ]
         }

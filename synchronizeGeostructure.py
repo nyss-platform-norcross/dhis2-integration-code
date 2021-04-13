@@ -65,6 +65,7 @@ def postGeoStructureToOrgUnitsDHIS2():
         print("Synchronizing geo structure: Post to DHIS2 returned ok")
 def synchronizeOrgUnits():
     initializeVariables()
-    getGeoStructure()
+    if not globalsNyss.useFlatOrganisationStructure:
+        getGeoStructure()
     postGeoStructureToOrgUnitsDHIS2() 
     print("Please remeber to add organizations to the users access rights in dhis2 before doing anything else!")

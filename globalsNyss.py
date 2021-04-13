@@ -1,7 +1,10 @@
 import json
 
 def initialize():
-    global loginURL, loginPARAMS, nyssRootURL, healthRisksURL, organisationUnitsURL, nationalSocietyId, projectId, dhisRootURL, organisationUnits, idSeedOrgUnit, metadataURL, dhisUsername, dhisPassword
+    global loginURL, loginPARAMS, dhisUsername, dhisPassword
+    global nyssRootURL, healthRisksURL, organisationUnitsURL, dhisRootURL, metadataURL
+    global nationalSocietyId, projectId, organisationUnits, idSeedOrgUnit, codeSeedOrgUnit, nameSeedOrgUnit
+    global useFlatOrganisationStructure
     # load config file and configure necessary variables
     with open("configuration.json") as json_file:
             config = json.load(json_file)
@@ -15,8 +18,11 @@ def initialize():
             dhisRootURL = config["dhisRootURL"]
             organisationUnits = config["seedOrgUnit"]
             idSeedOrgUnit = config["idSeedOrgUnit"]
+            codeSeedOrgUnit = config["codeSeedOrgUnit"]
+            nameSeedOrgUnit = config["nameSeedOrgUnit"]
             nationalSocietyId = config["nationalSocietyId"]
             projectId = config["projectId"]
+            useFlatOrganisationStructure = config["useFlatOrganisationStructure"]
     geoStructureNyss = {}
     # api-endpoint nyss
     loginURL = nyssRootURL + "authentication/login"

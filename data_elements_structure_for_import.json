@@ -75,6 +75,36 @@
             "formName": "Male 5 years and above" 
         },
         {
+            "id": "fb21c617ca9",
+            "code": "nyssRegion",
+            "name": "Region",
+            "shortName": "nyssreg",
+            "aggregationType": "SUM",
+            "domainType": "TRACKER",
+            "valueType": "TEXT",
+            "formName": "Region of report" 
+        },
+        {
+            "id": "b048acb1e1a",
+            "code": "nyssDistrict",
+            "name": "District",
+            "shortName": "nyssdis",
+            "aggregationType": "SUM",
+            "domainType": "TRACKER",
+            "valueType": "TEXT",
+            "formName": "District of report" 
+        },
+        {
+            "id": "d8d6b1c48a4",
+            "code": "nyssVillage",
+            "name": "Village",
+            "shortName": "nyssvill",
+            "aggregationType": "SUM",
+            "domainType": "TRACKER",
+            "valueType": "TEXT",
+            "formName": "Village of report" 
+        },  
+        {
             "id": "TtnAsCEqwf2",
             "code": "uniqueNyssEventIdentifier",
             "name": "Event identifier Nyss",

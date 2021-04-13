@@ -12,12 +12,9 @@ def initializeVariables():
 
 def synchronizeReports():
     initializeVariables()
-    reports = {
-        "events" : []
-    }
     with requests.Session() as session:
         #Get already existing events
-        r = requests.get(eventsURL + "?orgUnit=" + globalsNyss.idSeedOrgUnit + "&ouMode=DESCENDANTS&paging=false&payloadFormat=json", auth=(globalsNyss.dhisUsername, globalsNyss.dhisPassword), json=reports).json()    
+        r = requests.get(eventsURL + "?orgUnit=" + globalsNyss.idSeedOrgUnit + "&ouMode=DESCENDANTS&paging=false&payloadFormat=json", auth=(globalsNyss.dhisUsername, globalsNyss.dhisPassword)).json()    
         eventIdentifiers = []
         for event in r['events']:
             for value in event['dataValues']:
@@ -48,18 +45,35 @@ def synchronizeReports():
             for report in reportsReformatted:
                 report['Date'] = report['\ufeffDate']
                 report.pop('\ufeffDate')
-        for report in reportsReformatted:
+        
+        reports = formatReports(reportsReformatted, eventIdentifiers)
+        r = requests.post(eventsURL + "?skipFirst=true&async=true&dryRun=false&dataElementIdScheme=UID&orgUnitIdScheme=CODE&eventIdScheme=UID&idScheme=UID&payloadFormat=json", auth=(globalsNyss.dhisUsername, globalsNyss.dhisPassword), json=reports)    
+        if r.ok is True:
+            print("Adding events: Post to DHIS2 returned ok")
+  
+def formatReports(reportsReformatted, eventIdentifiers):
+    reports = {
+        "events" : []
+    }
+    for report in reportsReformatted:
             identifier = hashlib.md5(str.encode("nyss_" + report['Phone number'] + "_" + report['Date'] + "_" + report['Time'])).hexdigest()[0:11]
             if identifier in eventIdentifiers:
                 continue
             else:
+                if globalsNyss.useFlatOrganisationStructure:
+                    codeOrgUnit = globalsNyss.codeSeedOrgUnit
+                    nameSeedOrgUnit = globalsNyss.nameSeedOrgUnit
+                else:
+                    codeOrgUnit = "nyss_village_" + report['Village'],
+                    nameSeedOrgUnit = report['Village']
+                
                 reports['events'].append(
                     {
                         "program" : "nyss_rep_pr",
                         "programStage" : "nyss_55c401",
-                        "orgUnit" : "nyss_village_" + report['Village'],
+                        "orgUnit" : codeOrgUnit,
                         "status": "COMPLETED",
-                        "orgUnitName": report['Village'], 
+                        "orgUnitName": nameSeedOrgUnit,
                         "eventDate": report['Date'] + "T" + report['Time'] + ":00.000",
                         "completedDate": report['Date'] + "T" + report['Time'],
                         "dataValues" : [
@@ -88,13 +102,22 @@ def synchronizeReports():
                                 "value": "[" + report['Location'].split('/')[0] + "," + report['Location'].split('/')[1] + "]"
                             },
                             {
+                                "dataElement": "fb21c617ca9",
+                                "value": report['District']
+                            },
+                            {
+                                "dataElement": "b048acb1e1a",
+                                "value": report['Region']
+                            },
+                            {
+                                "dataElement": "d8d6b1c48a4",
+                                "value": report['Village']
+                            },
+                            {
                                 "dataElement": "TtnAsCEqwf2",
                                 "value": identifier
                             }
                         ]
                     }
                 )
-        r = requests.post(eventsURL + "?skipFirst=true&async=true&dryRun=false&dataElementIdScheme=UID&orgUnitIdScheme=CODE&eventIdScheme=UID&idScheme=UID&payloadFormat=json", auth=(globalsNyss.dhisUsername, globalsNyss.dhisPassword), json=reports)    
-        if r.ok is True:
-            print("Adding events: Post to DHIS2 returned ok")
-  
+    return reports
