@@ -6,97 +6,11 @@ import json
 import csv
 import hashlib
 
-# load config file and configure necessary variables
-with open("configuration.json") as json_file:
-        config = json.load(json_file)
-        loginPARAMS = {
-            "username" : config["nyssUsername"],
-            "password" : config["nyssPassword"]
-        }
-        dhisUsername = config["dhisUsername"]
-        dhisPassword = config["dhisPassword"]
-        nyssRootURL = config["nyssRootURL"]
-        dhisRootURL = config["dhisRootURL"]
-        organisationUnits = config["seedOrgUnit"]
-        idSeedOrgUnit = config["idSeedOrgUnit"]
-        nationalSocietyId = config["nationalSocietyId"]
-        projectId = config["projectId"]
+import globalsNyss
+import synchronizeGeostructure
 
-geoStructureNyss = {}
-
-# api-endpoint nyss
-loginURL = nyssRootURL + "authentication/login"
-geoStructureURL = nyssRootURL + "nationalSocietyStructure/get?nationalSocietyId=" + str(nationalSocietyId)
-reportsURL = nyssRootURL + "dhis2/list?nationalSocietyId=" + str(nationalSocietyId)
-healthRisksURL = nyssRootURL + "healthRisk/list"
-exportToCsv = nyssRootURL + "report/exportToCsv"
-
-# api endpoint DHIS2
-metadataURL = dhisRootURL + "metadata?"
-organisationUnitsURL = dhisRootURL + "organisationUnits"
-eventsURL = dhisRootURL + "events.json"
-
-def getGeoStructure():
-    with requests.Session() as session:
-        post = session.post(loginURL, json=loginPARAMS)
-        if post.json()['isSuccess'] is True:
-            geoStructureNyss = session.get(geoStructureURL).json()
-    for region in geoStructureNyss['value']['regions']:
-        regionId = str(uuid.uuid4())[:11]
-        organisationUnits['organisationUnits'].append(
-            {
-                "id": regionId,
-                "code" : "nyss_region_" + region['name'],
-                "level": 2,
-                "openingDate": "2020-10-15T00:00:00.000",
-                "name": region['name'],
-                "shortName": "short" + region['name'],
-                "parent" : {
-                    "code" : "nyss_country_mandawi"
-                }
-            }
-        )
-        for district in region['districts']:
-            districtId = str(uuid.uuid4())[:11]
-            organisationUnits['organisationUnits'].append(
-                {
-                    "id": districtId,
-                    "code" : "nyss_district_" + district['name'],
-                    "level": 3,
-                    "openingDate": "2020-10-15T00:00:00.000",
-                    "name": district['name'],
-                    "shortName": "short" + district['name'],
-                    "parent": {
-                        "code" : "nyss_region_" + region['name']
-                    }
-                }
-            )
-            for village in district['villages']:
-                villageId = str(uuid.uuid4())[:11]
-                organisationUnits['organisationUnits'].append(
-                    {
-                        "id": villageId,
-                        "code" : "nyss_village_" + village['name'],
-                        "level": 4,
-                        "openingDate": "2020-10-15T00:00:00.000",
-                        "name": village['name'],
-                        "shortName": "short" + village['name'],
-                        "parent" : {
-                            "code" : "nyss_district_" + district['name']
-                        }
-                    }
-                )
-    if len(organisationUnits['organisationUnits']) > 1:
-        print("Something was appended to the organisation units.")
-def postGeoStructureToOrgUnitsDHIS2():
-    print("Posting geo structure to DHIS2...")
-    r = requests.post(metadataURL + "identifier=CODE", auth=(dhisUsername, dhisPassword), json=organisationUnits)
-    if r.ok is True:
-        print("Synchronizing geo structure: Post to DHIS2 returned ok")
-def synchronizeOrgUnits():
-    getGeoStructure()
-    postGeoStructureToOrgUnitsDHIS2() 
-    print("Please remeber to add organizations to the users access rights in dhis2 before doing anything else!")
+# Set up all necessary global variables
+globalsNyss.initialize()
 
 def createDataElements():
     with open("data_elements_structure_for_import.json") as json_file:
@@ -220,7 +134,7 @@ def synchronizeReports():
         
 def switch(argument):
     switcher = {
-        1: synchronizeOrgUnits,
+        1: synchronizeGeostructure.synchronizeOrgUnits,
         2: createDataElements,
         3: createProgram,
         4: synchronizeReports
@@ -229,6 +143,7 @@ def switch(argument):
     func()
 
 if __name__ == "__main__":
+    globalsNyss.initialize()
     print("Please type + enter what you want to do:")
     print("Synchronize organisational structure: 1")
     print("Create necessary data elements & options: 2")
