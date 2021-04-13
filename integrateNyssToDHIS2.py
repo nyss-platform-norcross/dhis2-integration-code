@@ -228,9 +228,10 @@ def switch(argument):
     func = switcher.get(argument)
     func()
 
-print("Please type + enter what you want to do:")
-print("Synchronize organisational structure: 1")
-print("Create necessary data elements & options: 2")
-print("Create program & stages: 3")
-print("Synchronize reports: 4")
-switch(int(input()))
+if __name__ == "__main__":
+    print("Please type + enter what you want to do:")
+    print("Synchronize organisational structure: 1")
+    print("Create necessary data elements & options: 2")
+    print("Create program & stages: 3")
+    print("Synchronize reports: 4")
+    switch(int(input()))
