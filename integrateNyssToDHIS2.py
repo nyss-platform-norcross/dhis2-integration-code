@@ -8,40 +8,16 @@ import hashlib
 
 import globalsNyss
 import synchronizeGeostructure
+import createDataElements
 
 # Set up all necessary global variables
 globalsNyss.initialize()
 
-def createDataElements():
-    with open("data_elements_structure_for_import.json") as json_file:
-        dataStructureDHIS2 = json.load(json_file)
-        with requests.Session() as session:
-            post = session.post(loginURL, json=loginPARAMS)
-            options = []
-            if post.json()['isSuccess'] is True:
-                healthRisksList = session.get(healthRisksURL).json()
-                for healthRisk in healthRisksList['value']:
-                    options.append({
-                        "code" : "nyss_" + str(healthRisk['name']).replace(" ", "_"),
-                        "name" : healthRisk['name'],
-                        "sortOrder" : healthRisk['id'],
-                        "optionSet" : {
-                            "code": "nyss_healthRiskEventsTitles"
-                        }
-                    })
-                    dataStructureDHIS2['optionSets'][0]['options'].append({
-                        "code" : "nyss_" + str(healthRisk['name']).replace(" ", "_")
-                    })
-                dataStructureDHIS2['options'] = options
-        r = requests.post(metadataURL + "identifier=CODE", auth=(dhisUsername, dhisPassword), json=dataStructureDHIS2)
-        if r.ok is True:
-            print("Adding data elements: Post to DHIS2 returned ok")
 
 def createProgram():
     with open("program_events.json") as json_file:
         dataStructureProgramDHIS2 = json.load(json_file)
         dataStructureProgramDHIS2['programs'][0]['organisationUnits'] = requests.get(organisationUnitsURL, auth=(dhisUsername, dhisPassword)).json()['organisationUnits']
-        print()
         r = requests.post(metadataURL + "identifier=UID", auth=(dhisUsername, dhisPassword), json=dataStructureProgramDHIS2)
         if r.ok is True:
            print("Adding program & stage: Post to DHIS2 returned ok")
@@ -135,7 +111,7 @@ def synchronizeReports():
 def switch(argument):
     switcher = {
         1: synchronizeGeostructure.synchronizeOrgUnits,
-        2: createDataElements,
+        2: createDataElements.createDataElements,
         3: createProgram,
         4: synchronizeReports
     }
