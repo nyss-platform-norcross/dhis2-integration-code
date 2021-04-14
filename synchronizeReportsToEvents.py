@@ -121,3 +121,7 @@ def formatReports(reportsReformatted, eventIdentifiers):
                     }
                 )
     return reports
+
+if __name__ == "__main__":
+    globalsNyss.initialize()
+    synchronizeReports()
