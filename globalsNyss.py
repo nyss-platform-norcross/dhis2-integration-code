@@ -2,7 +2,7 @@ import json
 
 def initialize():
     global loginURL, loginPARAMS, dhisUsername, dhisPassword
-    global nyssRootURL, healthRisksURL, organisationUnitsURL, dhisRootURL, metadataURL
+    global nyssRootURL, projectHealthRisksURL, organisationUnitsURL, dhisRootURL, metadataURL
     global nationalSocietyId, projectId, organisationUnits, idSeedOrgUnit, codeSeedOrgUnit, nameSeedOrgUnit
     global useFlatOrganisationStructure
     # load config file and configure necessary variables
@@ -27,7 +27,7 @@ def initialize():
     # api-endpoint nyss
     loginURL = nyssRootURL + "authentication/login"
     reportsURL = nyssRootURL + "dhis2/list?nationalSocietyId=" + str(nationalSocietyId)
-    healthRisksURL = nyssRootURL + "healthRisk/list"
+    projectHealthRisksURL = nyssRootURL + "project/" + str(projectId) + "/get"
     # api endpoint DHIS2
     metadataURL = dhisRootURL + "metadata?"
     organisationUnitsURL = dhisRootURL + "organisationUnits"

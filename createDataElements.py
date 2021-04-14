@@ -9,18 +9,18 @@ def createDataElements():
             post = session.post(globalsNyss.loginURL, json=globalsNyss.loginPARAMS)
             options = []
             if post.json()['isSuccess'] is True:
-                healthRisksList = session.get(globalsNyss.healthRisksURL).json()
-                for healthRisk in healthRisksList['value']:
+                healthRisksList = session.get(globalsNyss.projectHealthRisksURL).json()
+                for healthRisk in healthRisksList['value']['projectHealthRisks']:
                     options.append({
-                        "code" : "nyss_" + str(healthRisk['name']).replace(" ", "_"),
-                        "name" : healthRisk['name'],
+                        "code" : "nyss_" + str(healthRisk['healthRiskName']).replace(" ", "_"),
+                        "name" : healthRisk['healthRiskName'],
                         "sortOrder" : healthRisk['id'],
                         "optionSet" : {
                             "code": "nyss_healthRiskEventsTitles"
                         }
                     })
                     dataStructureDHIS2['optionSets'][0]['options'].append({
-                        "code" : "nyss_" + str(healthRisk['name']).replace(" ", "_")
+                        "code" : "nyss_" + str(healthRisk['healthRiskName']).replace(" ", "_")
                     })
                 dataStructureDHIS2['options'] = options
         r = requests.post(globalsNyss.metadataURL + "identifier=CODE", auth=(globalsNyss.dhisUsername, globalsNyss.dhisPassword), json=dataStructureDHIS2)
