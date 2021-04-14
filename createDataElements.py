@@ -11,6 +11,8 @@ def createDataElements():
             if post.json()['isSuccess'] is True:
                 healthRisksList = session.get(globalsNyss.projectHealthRisksURL).json()
                 for healthRisk in healthRisksList['value']['projectHealthRisks']:
+                    if healthRisk['healthRiskCode'] == 98 or healthRisk['healthRiskCode'] == 99:    
+                        continue
                     options.append({
                         "code" : "nyss_" + str(healthRisk['healthRiskName']).replace(" ", "_"),
                         "name" : healthRisk['healthRiskName'],

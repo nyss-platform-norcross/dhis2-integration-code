@@ -56,6 +56,8 @@ def formatReports(reportsReformatted, eventIdentifiers):
         "events" : []
     }
     for report in reportsReformatted:
+            if report['Health risk'] == 'Activity report' or report['Health risk'] == 'zero report':
+                continue
             identifier = hashlib.md5(str.encode("nyss_" + report['Phone number'] + "_" + report['Date'] + "_" + report['Time'])).hexdigest()[0:11]
             if identifier in eventIdentifiers:
                 continue
