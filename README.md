@@ -2,15 +2,7 @@
 
 This is a python script allowing to configure a dhis2 instance with the Nyss data structure and to push nyss reports to dhis2 events. 
 
-## 1. Usage
-
-
-### 1.1. Synchronize organisational structure
-
-If you type 1 and press enter, depending on your configuration of the "useFlatOrganisationalStructre", the script will either create one level 1 seed organisational unit in DHIS2 (flat structre), or synchronize the current geographical structure from Nyss to DHIS2. 
-
-If you set the "useFlatOrganisationalStructure" variable to false, you need to run this option whenever you add a geographical level to Nyss (region, district or village).
-## 2. Configuration
+## 1. Configuration
 
 The script relies on a number configuration variables to be set in the file "configuration.json". These depend upon your user credentials in Nyss and DHIS2, your URL and your level 1 organisational unit in DHIS2. Below is an example configuration that uses the Nyss demo site, a publicly available login to the demo site and a local DHIS2 instance set up with the default credentials.
 
@@ -47,7 +39,7 @@ The credentials set up for DHIS2 need to have access levels set to the level 1 (
 }
 ```
 
-## 3. Usage
+## 2. Usage
 
 Run
 
@@ -57,7 +49,7 @@ python3 integrateNyssToDHIS2.py
 
 and select your choice in the interactive command line interface.
 
-### 3.1. First time 
+### 2.1. First time 
 
 Select 1, to synchronize the geographical structure of Nyss to DHIS2. If you set up a new level 1 organisation unit in DHIS2, go to your DHIS2 instance and set access rights to your user. 
 
@@ -67,13 +59,13 @@ Run the script, select option 3. Within DHIS2 under Maintenace -> Program, you s
 
 If all went well, you can now run the script and select option 4 to get all new reports from Nyss and push them as events to DHIS2. 
 
-### 3.2. Add new geographical structure from Nyss to DHIS2
+### 2.2. Add new geographical structure from Nyss to DHIS2
 
 Run the script and select 1. 
 
-### 3.3. Synchronize new reports
+### 2.3. Synchronize new reports
 
-Run the script and select 4. You can also directly run 
+Run integrateNyssToDHIS2 and select 4. You can also directly run 
 ```
 python3 synchronizeReportsToEvents.py
 ```
