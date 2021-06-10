@@ -22,7 +22,7 @@ def getGeoStructure():
                 "name": region['name'],
                 "shortName": "short" + region['name'],
                 "parent" : {
-                    "code" : "nyss_country_mandawi"
+                    "code" : globalsNyss.codeSeedOrgUnit
                 }
             }
         )
