@@ -16,10 +16,11 @@ def synchronizeReports():
         #Get already existing events
         r = requests.get(eventsURL + "?orgUnit=" + globalsNyss.idSeedOrgUnit + "&ouMode=DESCENDANTS&paging=false&payloadFormat=json", auth=(globalsNyss.dhisUsername, globalsNyss.dhisPassword)).json()    
         eventIdentifiers = []
-        for event in r['events']:
-            for value in event['dataValues']:
-                if value['dataElement'] == "TtnAsCEqwf2":
-                    eventIdentifiers.append(value['value'])
+        if 'event' in r:
+            for event in r['events']:
+                for value in event['dataValues']:
+                    if value['dataElement'] == "TtnAsCEqwf2":
+                        eventIdentifiers.append(value['value'])
         #Proceed to new events
         post = session.post(globalsNyss.loginURL, json=globalsNyss.loginPARAMS)
         if post.json()['isSuccess'] is True:
@@ -41,10 +42,6 @@ def synchronizeReports():
                 for indexInner, item in enumerate(report):
                     reportDict[reportsList[0][indexInner]] = item    
                 reportsReformatted.append(reportDict)
-            # correct for faulty naming in date key
-            for report in reportsReformatted:
-                report['Date'] = report['\ufeffDate']
-                report.pop('\ufeffDate')
         
         reports = formatReports(reportsReformatted, eventIdentifiers)
         r = requests.post(eventsURL + "?skipFirst=true&async=true&dryRun=false&dataElementIdScheme=UID&orgUnitIdScheme=CODE&eventIdScheme=UID&idScheme=UID&payloadFormat=json", auth=(globalsNyss.dhisUsername, globalsNyss.dhisPassword), json=reports)    
@@ -58,7 +55,11 @@ def formatReports(reportsReformatted, eventIdentifiers):
     for report in reportsReformatted:
             if report['Health risk'] == 'Activity report' or report['Health risk'] == 'zero report':
                 continue
-            identifier = hashlib.md5(str.encode("nyss_" + report['Phone number'] + "_" + report['Date'] + "_" + report['Time'])).hexdigest()[0:11]
+            if '\ufeffID' in report:
+                report['ID'] = report['\ufeffID']
+                report.pop('\ufeffID', None)
+            # Switch to use report id as basis for hash
+            identifier = hashlib.md5(str.encode("nyss_" + report['ID'])).hexdigest()[0:11]
             if identifier in eventIdentifiers:
                 continue
             else:
