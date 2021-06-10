@@ -16,7 +16,7 @@ def synchronizeReports():
         #Get already existing events
         r = requests.get(eventsURL + "?orgUnit=" + globalsNyss.idSeedOrgUnit + "&ouMode=DESCENDANTS&paging=false&payloadFormat=json", auth=(globalsNyss.dhisUsername, globalsNyss.dhisPassword)).json()    
         eventIdentifiers = []
-        if 'event' in r:
+        if 'events' in r:
             for event in r['events']:
                 for value in event['dataValues']:
                     if value['dataElement'] == "TtnAsCEqwf2":
